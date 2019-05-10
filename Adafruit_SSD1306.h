@@ -136,14 +136,7 @@ protected:
 		dc = 1;
 		cs = 0;
 
-		for(uint16_t i=0, q=buffer.size(); i<q; i++)
-			mspi.write(buffer[i]);
-
-		if(height() == 32)
-		{
-			for(uint16_t i=0, q=buffer.size(); i<q; i++)
-				mspi.write(0);
-		}
+                mspi.write(reinterpret_cast<char *>(buffer.data()), buffer.size(), nullptr, 0);
 
 		cs = 1;
 	};
